@@ -15,5 +15,6 @@
 		<button type="submit" name="gumb" value="login">Ulogiraj se!</button>
 		<button type="submit" name="gumb" value="novi">Stvori novog korisnika!</button>
 	</form>
+	<?php echo $message; ?>
 </body>
 </html>
