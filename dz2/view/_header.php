@@ -21,7 +21,7 @@
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/myQuacks">My quacks</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/quacksFromFollowees">Following</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/followers">Followers</a></li>
-            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/postsWhereMyUsernameAppears">Quacks <?php echo '@' . $_SESSION['username'] ?></a></li>
+            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/quacksWhereMyUsernameAppears">Quacks <?php echo '@' . $_SESSION['username'] ?></a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/search">#search</a></li>
         </ul>
 	</nav>

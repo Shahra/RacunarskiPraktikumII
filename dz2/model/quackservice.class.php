@@ -83,6 +83,29 @@ class QuackService
 		return $arr;
 	}
 
+	function getQuacksWhereMyUsernameAppears()
+	{
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT q.quack, q.date, u.username FROM dz2_quacks q, dz2_users u WHERE q.quack LIKE :username AND q.id_user = u.id;');
+
+			$st->execute( array( 'username' => '%@' . $_SESSION['username'] . '%' ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Quack( $row['quack'], $row['date'], $row['username']);
+		}
+
+		return $arr;
+	}
+
 	function unfollowUser($username)
 	{
 		if (session_status() == PHP_SESSION_NONE) {

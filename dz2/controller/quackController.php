@@ -82,8 +82,18 @@ class QuackController extends BaseController
 		$this->registry->template->show( 'quacks_followers' );
 	}
 
-	public function postsWhereMyUsernameAppears(){
-		echo 'postsWhereMyUsernameAppears';
+	public function quacksWhereMyUsernameAppears(){
+
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
+		$qs = new QuackService();
+
+		$this->registry->template->title = 'Quacks @' . $_SESSION['username'];
+		$this->registry->template->quackList = $qs->getQuacksWhereMyUsernameAppears();
+
+		$this->registry->template->show( 'quacks_index' );
 	}
 
 	public function search(){
