@@ -72,7 +72,12 @@ class QuackController extends BaseController
 	}
 
 	public function followers(){
-		echo 'followers';
+		$qs = new QuackService();
+
+		$this->registry->template->title = 'Followers';
+		$this->registry->template->followers = $qs->getFollowers();
+
+		$this->registry->template->show( 'quacks_followers' );
 	}
 
 	public function postsWhereMyUsernameAppears(){
