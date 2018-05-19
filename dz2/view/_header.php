@@ -15,9 +15,6 @@
 
 	<nav>
         <ul>
-            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=users">Popis svih korisnika</a></li>
-            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=books">Popis svih knjiga</a></li>
-            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=books/search">Tražilica knjiga po autoru</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/myQuacks">My quacks</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/quacksFromFollowees">Following</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/followers">Followers</a></li>
