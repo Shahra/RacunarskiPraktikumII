@@ -10,7 +10,12 @@ class QuackController extends BaseController
 
 	//TODO update controllers, these are only placeholders.
 	public function myQuacks(){
-		echo 'myQuacks';
+		$qs = new QuackService();
+
+		$this->registry->template->title = 'My Quacks';
+		$this->registry->template->quackList = $qs->getMyQuacks();
+
+		$this->registry->template->show( 'quacks_index' );
 	}
 
 	public function quacksFromFollowees(){
