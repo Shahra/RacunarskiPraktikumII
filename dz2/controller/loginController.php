@@ -10,7 +10,10 @@ class LoginController extends BaseController
 	
 	public function processLogin()
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
 		if(!preg_match('/^[a-zA-Z]{1,20}$/', $_POST["username"])){
 			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
 			exit();

@@ -22,7 +22,9 @@ class QuackService
 
 	function getMyQuacks()
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();
@@ -60,7 +62,9 @@ class QuackService
 
 	function getQuacksFromFollowees()
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();
@@ -81,7 +85,9 @@ class QuackService
 
 	function unfollowUser($username)
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();
@@ -94,7 +100,9 @@ class QuackService
 
 	function followUser($username)
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();
@@ -107,7 +115,9 @@ class QuackService
 
 	function getFollowers()
 	{
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();

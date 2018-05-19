@@ -28,7 +28,9 @@ class QuackController extends BaseController
 	}
 
 	public function updateFollowees(){
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 
 		$qs = new QuackService();
 
