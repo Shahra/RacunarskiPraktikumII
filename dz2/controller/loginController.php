@@ -54,7 +54,7 @@ class LoginController extends BaseController
 				{
 					// Dobar je. Ulogiraj ga.
           $_SESSION['username'] = $_POST['username'];
-					header( 'Location: ' . __SITE_URL . '/index.php?rt=users' );
+					header( 'Location: ' . __SITE_URL . '/index.php?rt=quack/myQuacks' );
 					exit();
 				}
 				else
