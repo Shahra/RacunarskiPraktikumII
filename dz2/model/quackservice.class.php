@@ -167,6 +167,20 @@ class QuackService
 		return $arr;
 	}
 
+	function submitQuack($quack){
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('INSERT INTO dz2_quacks(id_user, quack, date) VALUES (:my_id, :quack, NOW());');
+
+			$st->execute( array( 'my_id' => $this->getIdOfUser($_SESSION['username'] ), 'quack' => $quack ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
+
 };
 
 ?>

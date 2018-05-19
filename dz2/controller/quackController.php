@@ -22,7 +22,25 @@ class QuackController extends BaseController
 			$this->registry->template->title = 'My Quacks';
 			$this->registry->template->quackList = $qs->getMyQuacks();
 
-			$this->registry->template->show( 'quacks_index' );
+			$this->registry->template->show( 'quacks_myquacks' );
+		}
+		else{
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=login/index' );
+		}
+	}
+
+	public function processSubmit(){
+		if(ValidationService::loggedIn()){
+			$qs = new QuackService();
+			if(!isset($_POST['quack']) || !preg_match('/^.{1,140}$/', $_POST['quack'])){
+				header( 'Location: ' . __SITE_URL . '/index.php?rt=quack/myQuacks' );
+				exit();
+			}
+			else{
+				$qs->submitQuack($_POST['quack']);
+				header( 'Location: ' . __SITE_URL . '/index.php?rt=quack/myQuacks' );
+				exit();
+			}
 		}
 		else{
 			header( 'Location: ' . __SITE_URL . '/index.php?rt=login/index' );
