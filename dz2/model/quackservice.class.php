@@ -88,12 +88,20 @@ class QuackService
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
+		return $this->getQuacksThatContain('@' . $_SESSION['username']);
+	}
+
+	function getQuacksThatContain($string)
+	{
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT q.quack, q.date, u.username FROM dz2_quacks q, dz2_users u WHERE q.quack LIKE :username AND q.id_user = u.id;');
+			$st = $db->prepare('SELECT q.quack, q.date, u.username FROM dz2_quacks q, dz2_users u WHERE q.quack LIKE :string AND q.id_user = u.id;');
 
-			$st->execute( array( 'username' => '%@' . $_SESSION['username'] . '%' ) );
+			$st->execute( array( 'string' => '%'. $string .'%' ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
