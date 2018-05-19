@@ -10,7 +10,7 @@ class LoginController extends BaseController
 	
 	public function processLogin()
 	{
-		// echo '<pre>'. print_r($_POST). '</pre>';
+		session_start();
 		if(!preg_match('/^[a-zA-Z]{1,20}$/', $_POST["username"])){
 			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
 			exit();
@@ -47,6 +47,7 @@ class LoginController extends BaseController
 				if( password_verify( $_POST['password'], $hash ) )
 				{
 					// Dobar je. Ulogiraj ga.
+          $_SESSION['username'] = $_POST['username'];
 					header( 'Location: ' . __SITE_URL . '/index.php?rt=users' );
 					exit();
 				}

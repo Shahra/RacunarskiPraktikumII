@@ -10,7 +10,7 @@ class UsersController extends BaseController
 		$this->registry->template->title = 'Popis svih korisnika knjižnice';
 		$this->registry->template->userList = $ls->getAllUsers();
 
-        $this->registry->template->show( 'users_index' );
+		$this->registry->template->show( 'users_index' );
 	}
 }; 
 
