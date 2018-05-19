@@ -105,6 +105,27 @@ class QuackService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
 
+	function getFollowers()
+	{
+		session_start();
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT username FROM dz2_users WHERE id IN (SELECT DISTINCT(id_user) FROM dz2_follows WHERE id_followed_user = :my_id);');
+
+			$st->execute( array( 'my_id' => $this->getIdOfUser($_SESSION['username'] ) ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = $row['username'];
+		}
+
+		return $arr;
+	}
+
 };
 
 ?>
