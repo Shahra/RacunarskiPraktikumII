@@ -82,12 +82,41 @@ class QuackController extends BaseController
 		$this->registry->template->show( 'quacks_followers' );
 	}
 
-	public function postsWhereMyUsernameAppears(){
-		echo 'postsWhereMyUsernameAppears';
+	public function quacksWhereMyUsernameAppears(){
+
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
+		$qs = new QuackService();
+
+		$this->registry->template->title = 'Quacks @' . $_SESSION['username'];
+		$this->registry->template->quackList = $qs->getQuacksWhereMyUsernameAppears();
+
+		$this->registry->template->show( 'quacks_index' );
 	}
 
-	public function search(){
-		echo 'search';
+	public function search()
+	{
+		$this->registry->template->title = '#Search';
+		$this->registry->template->show( 'quacks_search' );
+	}
+
+	public function searchResults(){
+
+		$qs = new QuackService();
+
+		if( !isset( $_POST['criteria'] ) || !preg_match( '/^#[a-zA-Z]+$/', $_POST['criteria'] ) )
+		{
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=quack/search');
+			exit();
+		}
+		else{
+			$this->registry->template->title = 'Search results';
+			$this->registry->template->quackList = $qs->getQuacksThatContain($_POST['criteria']);
+
+			$this->registry->template->show( 'quacks_index' );
+		}
 	}
 }; 
 
