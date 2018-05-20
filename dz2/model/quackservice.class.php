@@ -3,6 +3,10 @@
 class QuackService
 {
 
+	function prepareQuack($quack){
+		return  preg_replace('/#(\S+)/', '<a href="' . __SITE_URL . '/index.php?rt=quack/search&criteria=\1">#\1</a>', $quack);
+	}
+
 	function getIdOfUser( $username )
 	{
 		try
@@ -37,7 +41,7 @@ class QuackService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Quack( $row['quack'], $row['date'], $row['username']);
+			$arr[] = new Quack( $this->prepareQuack($row['quack']), $row['date'], $row['username']);
 		}
 
 		return $arr;
@@ -77,7 +81,7 @@ class QuackService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Quack( $row['quack'], $row['date'], $row['username']);
+			$arr[] = new Quack( $this->prepareQuack($row['quack']), $row['date'], $row['username']);
 		}
 
 		return $arr;
@@ -108,7 +112,7 @@ class QuackService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Quack( $row['quack'], $row['date'], $row['username']);
+			$arr[] = new Quack( $this->prepareQuack($row['quack']), $row['date'], $row['username']);
 		}
 
 		return $arr;

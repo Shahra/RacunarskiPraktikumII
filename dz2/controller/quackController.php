@@ -139,8 +139,18 @@ class QuackController extends BaseController
 	public function search()
 	{
 		if(ValidationService::loggedIn()) {
-			$this->registry->template->title = '#Search';
-			$this->registry->template->show('quacks_search');
+			$qs = new QuackService();
+
+			if(isset($_GET['criteria']) && preg_match('/^[a-zA-Z]+$/', $_GET['criteria']) ){
+				$this->registry->template->title = 'Search results: ' . '#' . $_GET['criteria']  ;
+				$this->registry->template->quackList = $qs->getQuacksThatContain('#' . $_GET['criteria']);
+
+				$this->registry->template->show('quacks_index');
+			}
+			else{
+				$this->registry->template->title = '#Search';
+				$this->registry->template->show('quacks_search');
+			}
 		}
 		else{
 			header( 'Location: ' . __SITE_URL . '/index.php?rt=login/index' );
@@ -156,7 +166,7 @@ class QuackController extends BaseController
 				header('Location: ' . __SITE_URL . '/index.php?rt=quack/search');
 				exit();
 			} else {
-				$this->registry->template->title = 'Search results';
+				$this->registry->template->title = 'Search results: ' . '#' . $_POST['criteria'];
 				$this->registry->template->quackList = $qs->getQuacksThatContain($_POST['criteria']);
 
 				$this->registry->template->show('quacks_index');
