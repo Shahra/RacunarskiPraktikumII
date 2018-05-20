@@ -2,7 +2,6 @@
 
 class ValidationService
 {
-
 	public static function loggedIn()
 	{
 		if (session_status() == PHP_SESSION_NONE) {
@@ -16,7 +15,6 @@ class ValidationService
 			return true;
 		}
 	}
-
 };
 
 ?>
