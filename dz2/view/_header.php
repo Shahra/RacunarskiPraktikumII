@@ -1,4 +1,8 @@
 <?php
+    if (!ValidationService::loggedIn()){
+        header('Location: ' . __SITE_URL . '/index.php?rt=login/index');
+        exit();
+    }
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
