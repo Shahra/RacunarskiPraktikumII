@@ -103,7 +103,7 @@ class QuackService
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT q.quack, q.date, u.username FROM dz2_quacks q, dz2_users u WHERE q.quack LIKE :string AND q.id_user = u.id;');
+			$st = $db->prepare('SELECT q.quack, q.date, u.username FROM dz2_quacks q, dz2_users u WHERE q.quack LIKE :string AND q.id_user = u.id ORDER BY q.date DESC;');
 
 			$st->execute( array( 'string' => '%'. $string .'%' ) );
 		}
