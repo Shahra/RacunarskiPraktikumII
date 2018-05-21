@@ -1,4 +1,8 @@
 <?php
+    if (!ValidationService::loggedIn()){
+        header('Location: ' . __SITE_URL . '/index.php?rt=login/index');
+        exit();
+    }
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -20,6 +24,6 @@
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/followers">Followers</a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/quacksWhereMyUsernameAppears">Quacks <?php echo '@' . $_SESSION['username'] ?></a></li>
             <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=quack/search">#search</a></li>
-            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=login/index">Logout</a></li>
+            <li><a href="<?php echo __SITE_URL; ?>/index.php?rt=login/logout">Logout</a></li>
         </ul>
 	</nav>
