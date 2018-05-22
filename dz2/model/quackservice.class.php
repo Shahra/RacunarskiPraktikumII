@@ -4,7 +4,7 @@ class QuackService
 {
 
 	function prepareQuack($quack){
-		return  preg_replace('/#(\S+)/', '<a href="' . __SITE_URL . '/index.php?rt=quack/search&criteria=\1">#\1</a>', $quack);
+		return  preg_replace('/#([0-9a-zA-Z]+)/', '<a href="' . __SITE_URL . '/index.php?rt=quack/search&criteria=\1">#\1</a>', $quack);
 	}
 
 	function getIdOfUser( $username )
