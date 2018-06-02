@@ -8,21 +8,11 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        // postoji 6 primitivnih tipova
+        // Svi brojevi (i cijeli i realni) se reprezentiraju
+        // po IEEE-754, tj. kao C-ov double.
 
-        var u;
-        var o = null;
-        var b = true;
-        var n = 3;
-        var s = 'Kuca';
-        var sy = Symbol();
-
-        console.log(typeof (u)); //prints undefined
-        console.log(typeof (o)); //prints object
-        console.log(typeof (b)); //prints boolean
-        console.log(typeof (n)); //prints number
-        console.log(typeof (s)); //prints string
-        console.log(typeof (sy)); //prints symbol
+        var a = 5, b = 3.14, c = 1.5e2, d = 012, e = 0x1f;
+        console.log(a, b, c, d, e); //prints 5 3.14 150 10 31
     </script>
 </body>
 </html>
