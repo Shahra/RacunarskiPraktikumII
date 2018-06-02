@@ -2,15 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>01</title>
+    <title>main</title>
 </head>
 <body>
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        var a;
-        console.log("The value of a is " + a); // "...undefined"
-        console.log("The value of b is " + b); // ReferenceError exception
+        // postoji 6 primitivnih tipova
+
+        var u;
+        var o = null;
+        var b = true;
+        var n = 3;
+        var s = 'Kuca';
+        var sy = Symbol();
+
+        console.log(typeof (u)); //prints undefined
+        console.log(typeof (o)); //prints object
+        console.log(typeof (b)); //prints boolean
+        console.log(typeof (n)); //prints number
+        console.log(typeof (s)); //prints string
+        console.log(typeof (sy)); //prints symbol
     </script>
 </body>
 </html>
