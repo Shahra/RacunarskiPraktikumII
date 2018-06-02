@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function f(ulaz, izlaz){
+            if(ulaz === '') {
+                document.write(izlaz + '<br />');
+                return;
+            }
+            f(ulaz.substr(1), izlaz);
+            f(ulaz.substr(1), izlaz + ulaz[0]);
+        }
+        var ulaz = prompt('Unesi proizvoljan string: ');
+        document.write('Svi podstringovi zadanog stringa su: <br />');
+        f(ulaz, '');
+    </script>
+</body>
+</html>
