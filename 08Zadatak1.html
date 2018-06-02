@@ -6,8 +6,12 @@
 </head>
 <body>
     <script>
+        // Ako x nije string, onda document.write(x); automatski poziva
+        // x.toString() prije ispisa.
+
         for(var i = 1; i < 101; i++) {
             document.write(i + '<br/>');
+            console.log(i);
         }
     </script>
 </body>
