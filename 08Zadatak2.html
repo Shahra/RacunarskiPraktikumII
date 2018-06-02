@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tablica Mnozenja</title>
+    <link rel="stylesheet" type="text/css" href="tableBorder.css">
+</head>
+<body>
+    <!--tablica mnozenja za 4 * 4-->
+
+    <script>
+    /*  <table>
+            <tr>
+                <th></th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td>1 * 1</td>
+                <td>1 * 2</td>
+                <td>1 * 3</td>
+                <td>1 * 4</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>2 * 1</td>
+                <td>2 * 2</td>
+                <td>2 * 3</td>
+                <td>2 * 4</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>3 * 1</td>
+                <td>3 * 2</td>
+                <td>3 * 3</td>
+                <td>3 * 4</td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>4 * 1</td>
+                <td>4 * 2</td>
+                <td>4 * 3</td>
+                <td>4 * 4</td>
+            </tr>
+        </table>*/
+    var n = Number(prompt("Unesi velicinu tablice mnozenja:"));
+    document.write('<table>');
+    for(var i = 0; i < n + 1; i++) { //ima n + 1 stupaca i redaka
+        document.write('<tr>');
+            if(i === 0){ // ako je prvi redak, onda na prvom mjestu nema nicega, a ostatak moramo ispuniti sa brojevima
+                document.write('<th></th>');
+                for(var j = 1; j <= n; j++){
+                    document.write('<th>' + j + '</th>');
+                }
+            }
+            else { // inace u prvom stupcu stavljamo koji se broj nalazi u prvom stupcu, a dalje samo umnozak (i * j)
+                document.write('<th>'+ i + '</th>');
+                for (j = 1; j <= n; j++) {
+                    document.write('<td>' + (i * j) + '</td>');
+                }
+            }
+        document.write('</tr>');
+    }
+    document.write('</table>');
+    </script>
+</body>
+</html>
