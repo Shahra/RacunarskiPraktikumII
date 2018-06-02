@@ -8,11 +8,14 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        // Svi brojevi (i cijeli i realni) se reprezentiraju
-        // po IEEE-754, tj. kao C-ov double.
+        // Najjednostavniji tip koji se čuva na heap-u (reference type).
+        // Predstavlja kolekciju podataka i funkcija (slično klasi).
+        var osoba = new Object();
+        osoba.ime = "Pero"; osoba.starost = 20;
 
-        var a = 5, b = 3.14, c = 1.5e2, d = 012, e = 0x1f;
-        console.log(a, b, c, d, e); //prints 5 3.14 150 10 31
+        var x = osoba;
+        x.ime = "Ana";
+        console.log(osoba.ime); //prints Ana
     </script>
 </body>
 </html>
