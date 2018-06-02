@@ -8,14 +8,8 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        // Najjednostavniji tip koji se čuva na heap-u (reference type).
-        // Predstavlja kolekciju podataka i funkcija (slično klasi).
-        var osoba = new Object();
-        osoba.ime = "Pero"; osoba.starost = 20;
-
-        var x = osoba;
-        x.ime = "Ana";
-        console.log(osoba.ime); //prints Ana
+        console.log(kvadrat(5));
+        console.log(zbroj(5, 2));
     </script>
 </body>
 </html>
