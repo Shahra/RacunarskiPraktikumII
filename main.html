@@ -8,25 +8,13 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        // Niz podataka ne nužno istog tipa!
-        // Pristup elementima sa [...].
-        // Indexi su nenegativni cijeli brojevi.
-        // Automasko produljivanje/skraćivanje po potrebi.
-        // Svojstvo length; nije read-only(!)
-        var x = new Array();
-        x.push(7); x.push(8); x.push('proba');
-        console.log(x); //prints [7, 8, "proba"]
-        x.pop();
-        console.log(x); //prints [7, 8]
-        x.reverse();
-        console.log(x); //prints [8, 7]
-
-        var y = new Array();
-        y.push(4); y.push(1); y.push(5); y.push(3); y.push(2);
-        y.sort(function(a, b){
-           return (a<b)?-1:((a>b)?1:0);
-        });
-        console.log(y); //prints [1, 2, 3, 4, 5]
+        var x = {
+            ime: "Pero",
+            starost: 20
+        };
+        for( var i in x ){
+            console.log( i + "->" + x[i] ); //prints: "ime->Pero", "starost->20"
+        }
     </script>
 </body>
 </html>
