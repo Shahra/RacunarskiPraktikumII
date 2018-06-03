@@ -6,13 +6,17 @@
 </head>
 <body>
 <script>
-    var w = window.open( "http://www.google.hr", "g", "height=400,width=400,top=10,left=10,resizable=yes," );
-
-    w.resizeTo( 700, 400 );
-    w.moveTo( 500, 100 );
-    if(confirm( "Zatvori prozor?" )) {
-        w.close();
+    var s1 = setTimeout(f, 10000);
+    var s2 = setInterval(f, 1000);
+    var counter = 0;
+    function f() {
+        ++counter;
+        document.write('a <br />');
+        if(counter === 5) {
+            clearInterval(s2);
+        }
     }
+    //prints 1: a, 2: a, 3: a, 4: a, 5: a, 10: a where left side represents time (in seconds).
 </script>
 </body>
 </html>
