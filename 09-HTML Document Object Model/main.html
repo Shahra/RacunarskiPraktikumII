@@ -3,40 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
 
-<div id="div"></div>
+<div id="position"></div>
+<div id="clickHistory"></div>
+<button id="b">Ulovi me!</button>
 
 <script>
     $(document).ready( function() {
-        $( "#div" )
-            .css( "background-color", "blue" )
-            .css( "height", "100px" )
-            .css( "width", "100px" )
-            .css( "position", "absolute" )
-            .on( "mousemove", function(event)
-            {
+        var body_H = $("body").height(), body_W = $("body").width();
+        var ch = $('#clickHistory');
+        $("body")
+            .on("mousemove", function(event) {
+                $('#position')
+                    .html(event.clientX + ' ' + event.clientY);
+            })
+            .on("mousedown", function(event) {
+               if (event.button === 0) {
+                   ch.append($('<p>Lijevi klik misa</p>'));
+               }
+               else if (event.button === 1) {
+                   ch.append($('<p>Srednji klik misa</p>'));
+               }
+               else {
+                   ch.append($('<p>Desni klik misa</p>'));
+               }
+            });
+        $("#b")
+            .css("position", "absolute")
+            .on("mouseover", function() {
+                var noviX = Math.floor(Math.random() * body_W); //Slucajan cijeli broj izmedju 0 i 999
+                var noviY = Math.floor(Math.random() * body_H);
                 $(this)
-                    .css( "left", event.clientX - 50 )
-                    .css( "top",  event.clientY - 50 );
-            } );
-
-        $( "body" )
-            .on( "keydown", function(event)
-            {
-                if( event.key === "r" ) // pritisnuta tipka "r"
-                    $( "#div" ).css( "background-color", "red" );
-                else // pritisnuta neka druga tipka
-                    $( "#div" ).css( "background-color", "green" );
-            } );
-
-        $( "body" )
-            .on( "keyup", function(event)
-            {
-                $( "#div" ).css( "background-color", "blue" );
-            } );
+                    .css({
+                        "left": noviX,
+                        "top" : noviY
+                    });
+            });
     } );
 </script>
 </body>
