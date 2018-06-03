@@ -17,6 +17,18 @@
             constructor: Osoba, // treba jer {} kreira NOVI objekt
             kaziBok: function() { console.log( "Bok!" ); }
         };
+
+        function Student( ime, starost, JMBAG ) {
+            Osoba.call( this, ime, starost ); // konstr. bazne klase
+            this.JMBAG = JMBAG; // dodaj novo svojstvo
+        }
+
+        Student.prototype = Object.create(Osoba.prototype);
+        Student.prototype.constructor = Student;
+
+        Student.prototype.dajJMBAG = function() {
+            return this.JMBAG; // nova metoda u klasi Student
+        }
     </script>
 </body>
 </html>
