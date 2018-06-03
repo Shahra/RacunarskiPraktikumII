@@ -8,15 +8,20 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        class Osoba {
-            constructor(ime) { this.ime = ime; }
-            kaziBok() { console.log( "Bok!" ); }
-        }
+        var brojac = function() {
+            var x = 0;
 
-        class Student extends Osoba {
-            constructor(ime, JMBAG) { super(ime); this.JMBAG = JMBAG; }
-            dajJMBAG() { return this.JMBAG; }
-        }
+            return {
+                povecaj: function() { ++x; },
+                smanji: function() { --x; },
+                getX: function() { return x; }
+            };
+        };
+
+        var A = brojac(), B = brojac();
+        console.log( A.getX() + " " + B.getX() ); // 0 0
+        A.povecaj(); A.povecaj(); B.smanji();
+        console.log( A.getX() + " " + B.getX() ); // 2 -1
     </script>
 </body>
 </html>
