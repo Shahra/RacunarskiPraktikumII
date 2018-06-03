@@ -6,13 +6,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-<p id="vrijeme"></p>
+<input type="button" id="btn1" value="Klikni me!" />
 <script>
-    $(document).ready(function() {
-        function updateTime () {
-            $('#vrijeme').html(new Date().toLocaleTimeString());
-        }
-        setInterval(updateTime, 1000);
+    var btn = $( "#btn1" );
+    var f = function() {
+        alert( "Jedan prozor!" );
+    };
+    btn.on( "click", f );
+    btn.on( "click", function() {
+        alert( "Klik na gumb " + $(this).val() );
+        $(this).off("click", f); //Mice prvi handler.
     });
 </script>
 </body>
