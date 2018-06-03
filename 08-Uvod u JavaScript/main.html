@@ -8,20 +8,15 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        function Osoba() {}
+        function Osoba(ime, starost) {
+            this.ime = ime;
+            this.starost = starost;
+        }
 
-        Osoba.prototype.ime = "Pero";
-        Osoba.prototype.starost = 20;
-        Osoba.prototype.kaziBok = function() { console.log("Bok!"); };
-
-        var pero = new Osoba(), ana = new Osoba();
-        ana.ime = "Ana";
-
-        console.log( [pero.ime, ana.ime] ); // "Pero, Ana"
-        console.log( pero instanceof Osoba ); // "true"
-        console.log( ana instanceof Object ); // "true"
-        console.log( ana.kaziBok === pero.kaziBok ); // true
-
+        Osoba.prototype = {
+            constructor: Osoba, // treba jer {} kreira NOVI objekt
+            kaziBok: function() { console.log( "Bok!" ); }
+        };
     </script>
 </body>
 </html>
