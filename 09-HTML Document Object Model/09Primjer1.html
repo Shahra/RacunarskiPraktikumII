@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li>Pas</li>
+        <li>Mačka</li>
+        <li class="velika">Žirafa</li>
+        </ul>
+    <ul>
+        <li class="velika">Slon</li>
+        <li>Mrav</li>
+    </ul>
+</body>
+<script>
+    var uls = document.getElementsByTagName("ul");
+    console.log(uls);
+    for(var i = 0; i < uls.length; i++) {
+        // Dohvatimo i-ti HTML element tipa ul
+        var ul = uls[i];
+
+        for (var j = 0; j < ul.children.length; ++j) {
+            // Dohvatimo j-to dijete od ul -- to je j-ti element tipa li unutar tog ul-a
+            var zivotinja = ul.children[j];
+            console.log("Hello, " + zivotinja.innerHTML);
+
+            // Pogledamo klasu od tog li elementa. Što ako imamo <li class="velika opasna">Slon</li>?
+            if (zivotinja.className === "velika") {
+                zivotinja.style.fontSize = "24pt";
+            }
+        }
+    }
+</script>
+</html>
