@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<input id="a" type="text" />
+<input id="b" type="text" />
+<input type="button" value="+" />
+<input type="button" value="-" />
+<input type="button" value="*" />
+<input type="button" value="/" />
+<input id="r" type="text" />
+<script>
+    $(document).ready(function() {
+        $("[value='+']").on("click", function() {
+            $("#r").val( Number($("#a").val()) + Number($("#b").val()) );
+        });
+        $("[value='-']").on("click", function() {
+            $("#r").val( Number($("#a").val()) - Number($("#b").val()) );
+        });
+        $("[value='*']").on("click", function() {
+            $("#r").val( Number($("#a").val()) * Number($("#b").val()) );
+        });
+        $("[value='/']").on("click", function() {
+            $("#r").val( Number($("#a").val()) / Number($("#b").val()) );
+        });
+    });
+</script>
+</body>
+</html>
