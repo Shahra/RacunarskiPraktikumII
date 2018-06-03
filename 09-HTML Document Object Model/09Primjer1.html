@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
     <ul>
@@ -16,22 +17,13 @@
     </ul>
 </body>
 <script>
-    var uls = document.getElementsByTagName("ul");
-    console.log(uls);
-    for(var i = 0; i < uls.length; i++) {
-        // Dohvatimo i-ti HTML element tipa ul
-        var ul = uls[i];
+    // CSS Selector Reference -- https://www.w3schools.com/cssref/css_selectors.asp
+    var lis = $("li");
 
-        for (var j = 0; j < ul.children.length; ++j) {
-            // Dohvatimo j-to dijete od ul -- to je j-ti element tipa li unutar tog ul-a
-            var zivotinja = ul.children[j];
-            console.log("Hello, " + zivotinja.innerHTML);
+    $('.velika').css('font-size', '24pt');
 
-            // Pogledamo klasu od tog li elementa. Što ako imamo <li class="velika opasna">Slon</li>?
-            if (zivotinja.className === "velika") {
-                zivotinja.style.fontSize = "24pt";
-            }
-        }
+    for(var i = 0; i < lis.length; i++) {
+        console.log('Hello ' + lis.eq(i).html());
     }
 </script>
 </html>
