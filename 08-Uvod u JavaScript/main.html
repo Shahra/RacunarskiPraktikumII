@@ -8,32 +8,20 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        //Objektno orijentirano programiranje u JavaScriptu
-        var osoba = {
-          ime: 'Pero',
-          starost: 20,
-          kaziBok: function() {
-              console.log('Bok!');
-          }
-        };
-        osoba.prezime = 'Peric';
-        console.log(osoba); // prints {ime: "Pero", starost: 20, kaziBok: ƒ, prezime: "Peric"}
-        osoba.kaziBok(); // prints Bok!
+        function Osoba() {}
 
-        function Osoba( ime, starost ) {
-            // this se odnosi na objekt koji se konstruira sa new.
-            this.ime = ime;
-            this.starost = starost;
-            this.kaziBok = kaziBok;
-        }
-        function kaziBok() { console.log( "Bok!" ); }
+        Osoba.prototype.ime = "Pero";
+        Osoba.prototype.starost = 20;
+        Osoba.prototype.kaziBok = function() { console.log("Bok!"); };
 
-        var pero = new Osoba( "Pero", 20 );
-        var ana = new Osoba( "Ana", 19 );
+        var pero = new Osoba(), ana = new Osoba();
+        ana.ime = "Ana";
 
+        console.log( [pero.ime, ana.ime] ); // "Pero, Ana"
         console.log( pero instanceof Osoba ); // "true"
         console.log( ana instanceof Object ); // "true"
-        console.log( pero.kaziBok === ana.kaziBok ); // "true"
+        console.log( ana.kaziBok === pero.kaziBok ); // true
+
     </script>
 </body>
 </html>
