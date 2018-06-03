@@ -8,42 +8,33 @@
 </head>
 <body>
 
-<div id="position"></div>
-<div id="clickHistory"></div>
-<button id="b">Ulovi me!</button>
-
 <script>
-    $(document).ready( function() {
-        var body_H = $("body").height(), body_W = $("body").width();
-        var ch = $('#clickHistory');
-        $("body")
-            .on("mousemove", function(event) {
-                $('#position')
-                    .html(event.clientX + ' ' + event.clientY);
-            })
-            .on("mousedown", function(event) {
-               if (event.button === 0) {
-                   ch.append($('<p>Lijevi klik misa</p>'));
-               }
-               else if (event.button === 1) {
-                   ch.append($('<p>Srednji klik misa</p>'));
-               }
-               else {
-                   ch.append($('<p>Desni klik misa</p>'));
-               }
-            });
-        $("#b")
-            .css("position", "absolute")
-            .on("mouseover", function() {
-                var noviX = Math.floor(Math.random() * body_W); //Slucajan cijeli broj izmedju 0 i 999
-                var noviY = Math.floor(Math.random() * body_H);
-                $(this)
-                    .css({
-                        "left": noviX,
-                        "top" : noviY
-                    });
-            });
-    } );
+/*$( document ).ready( function() {
+    $( "button.klasa" )
+        .on( "click", function() {
+            alert( "Klik!" );
+        });
+
+    var btn = $( "<button>Klikni me!</button>" )
+                .addClass( "klasa" )
+    $( "body" ).append( btn );
+    // btn NE REAGIRA na događaj!!!
+});*/
+
+$( document ).ready( function() {
+    // Drugi parameter ("button.klasa") je CSS selektor
+    // podelemenata od body.
+    $( "body" ).on( "click", "button.klasa",
+        function() {
+            alert( "Klik!" );
+        }
+    );
+
+    var btn = $( "<button>Klikni me!</button>" ).addClass( "klasa" );
+
+    $( "body" ).append( btn );
+    // btn sad REAGIRA na događaj!!!
+});
 </script>
 </body>
 </html>
