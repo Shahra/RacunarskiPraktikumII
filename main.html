@@ -8,13 +8,50 @@
     <!--U HTML5 nije nužan atribut type="text/javascript"-->
     <script type="text/javascript" src = "example.js"></script>
     <script>
-        var x = {
-            ime: "Pero",
-            starost: 20
-        };
-        for( var i in x ){
-            console.log( i + "->" + x[i] ); //prints: "ime->Pero", "starost->20"
-        }
+        //Regularni izrazi
+
+        //Dva nacina: re1 === re2
+        var re1 = /ab+c/;
+        var re2 = new RegExp('ab+c');
+
+        // exec	    A RegExp method that executes a search for a match in a string. It returns an array of information or null on a mismatch.
+        // test	    A RegExp method that tests for a match in a string. It returns true or false.
+        // match	A String method that executes a search for a match in a string. It returns an array of information or null on a mismatch.
+        // search	A String method that tests for a match in a string. It returns the index of the match, or -1 if the search fails.
+        // replace	A String method that executes a search for a match in a string, and replaces the matched substring with a replacement substring.
+        // split	A String method that uses a regular expression or a fixed string to break a string into an array of substrings.
+
+        var str1 = 'abbbbbcabc';
+        var str2 = 'acb';
+
+        // exec	    A RegExp method that executes a search for a match in a string. It returns an array of information or null on a mismatch.
+        console.log(re2.exec(str1)); //prints ["abbbbbc", index: 0, input: "abbbbbcabc", groups: undefined]
+        console.log(re1.exec(str2)); //print null
+
+        // test	    A RegExp method that tests for a match in a string. It returns true or false.
+        console.log(re2.test(str1)); //prints true
+        console.log(re1.test(str2)); //prints false
+
+        // match	A String method that executes a search for a match in a string. It returns an array of information or null on a mismatch.
+        console.log(str1.match(re1)); //prints ["abbbbbc", index: 0, input: "abbbbbcabc", groups: undefined]
+        console.log(str2.match(re1)); //prints null
+
+        // search	A String method that tests for a match in a string. It returns the index of the match, or -1 if the search fails.
+        console.log(str1.search(re1)); //prints 0
+        console.log(str2.search(re1)); //prints -1
+
+        // replace	A String method that executes a search for a match in a string, and replaces the matched substring with a replacement substring.
+        var name = 'John Smith';
+        var notName = '123432';
+        var r = /(\w+)\s(\w+)/;
+        console.log(name.replace(r, '$2 $1')); //prints Smith John
+        console.log(notName.replace(r, '$2 $1')); //prints 123432
+
+        // split	A String method that uses a regular expression or a fixed string to break a string into an array of substrings.
+        var pattern = /\s*;\s*/;
+        var csv = 'proba1 ;proba2; proba3';
+        console.log(csv.split(pattern)); //prints ["proba1", "proba2", "proba3"]
+
     </script>
 </body>
 </html>
