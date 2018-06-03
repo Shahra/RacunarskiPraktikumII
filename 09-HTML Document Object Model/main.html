@@ -6,11 +6,12 @@
 </head>
 <body>
 <script>
-    window.onload = function() { //po ucitavanju dokumenta
-        var h1 = document.createElement("h1"); //napravi <h1></h1>
-        var h1_text = document.createTextNode("Naslov!");
-        h1.appendChild(h1_text); //<h1>Naslov</h1>
-        document.body.appendChild(h1); //dodaj u body h1
+    var w = window.open( "http://www.google.hr", "g", "height=400,width=400,top=10,left=10,resizable=yes," );
+
+    w.resizeTo( 700, 400 );
+    w.moveTo( 500, 100 );
+    if(confirm( "Zatvori prozor?" )) {
+        w.close();
     }
 </script>
 </body>
