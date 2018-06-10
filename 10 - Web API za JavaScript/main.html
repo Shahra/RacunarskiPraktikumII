@@ -10,6 +10,40 @@
     Ovaj tekst se prikaže ako canvas nije podržan.
 </canvas>
 <script>
+    $(document).ready( function() {
+        var canvas = $("#cnv").get(0);
+        var ctx = canvas.getContext("2d"); //opcionalno WebGL (za 3d)
+
+        ctx.lineWidth = 8; //debljina linije kojom crtamo
+        ctx.strokeStyle = "rgb(10, 20, 255, 0.5)"; //definira boju kojom crtamo, npr. "red"
+        ctx.fillStyle = "#00ff00"; //definira boju kojom ispunjavamo plohe,
+        ctx.strokeRect(20, 20, 100, 100); //crta rub pravokutnika
+        ctx.fillRect(200, 200, 100, 100); //ispunjava pravokutnik
+
+        ctx.beginPath(); //početak crtanja krivulje (“puta”)
+        ctx.moveTo(10, 10); //pomiče se u točku s koordinatama (x, y)
+        ctx.lineTo(100, 100); //crta liniju od kraja preth. dijela puta do (x, y)
+
+        //crta kružni isječak, prva dva parametra su koordinate centra, zatim radijus, pocetni kut, zavrsni kut, u smjeru kazaljke na satu
+        ctx.arc(200, 150, 40, 0, Math.PI / 2);
+
+        ctx.stroke(); //kraj crtanja krivulje
+        ctx.fill(); //ispunjava zatvorenu krivulju bojom
+
+        ctx.font = "bold 14px Arial"; //font
+        ctx.align = "left";
+        ctx.strokeText("Proba", 400, 400); //piše tekst na koordinate (x, y) koristeći ctx.strokeStyle
+        ctx.fillText("Proba", 300, 400); //piše tekst na koordinate (x, y) koristeći ctx.fillStyle
+
+
+        //crta sliku img (tipa Image) tako da joj je gornji lijevi kut
+        //u (x, y), te da je široka w, a visoka h pixela.
+        var img = new Image();
+        img.src = "../09-HTML Document Object Model/lav.jpg";
+        $(img).on("load", function() {
+            ctx.drawImage(this, 400, 50, 100, 100);
+        });
+    });
 </script>
 </body>
 </html>
