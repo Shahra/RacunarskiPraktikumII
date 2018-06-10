@@ -6,43 +6,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-<canvas height="600" width="600" id="canvas" style="border: solid 1px black">
+<canvas width="900" height="600" id="canvas" style="border: solid 1px black">
     Ovaj tekst se prikaže ako canvas nije podržan.
 </canvas>
 <script>
     $( document ).ready( crtaj );
 
-    function crtaj() {
-        // get(0) radi sljedeće:
-        // - iz jQuery kolekcije $( "#canvas" ) vraća prvi po redu HTML objekt.
-        // (Kolekcija se u ovom slučaju i sastoji samo od jednog HTML objekta.)
-        // Razlika u odnosu na $( "#canvas" ).at(0) je ta što .at(0) vraća ponovno jQuery objekt (a ne HTML).
-        // Ekvivalentno: $( "#canvas" )[0].getContext( "2d" );
-        var ctx = $("#canvas").get(0).getContext("2d");
-
-        //zapamti trenutnu matricu transformacije (na stogu).
-        ctx.save();
-
-        //od sada nadalje sve se crta zarotirano za kut phi oko ishodišta (u smjeru kazaljke na satu)
-        ctx.rotate(Math.PI / 15);
-
-        //od sada nadalje sve se crta skalirano za faktor (dx, dy).
-        ctx.scale(2, 2);
-
-        //od sada nadalje sve se crta translatirano za (dx, dy), tj. ishodište se pomiče u točku (dx, dy).
-        ctx.translate(10, 10);
-
+    function crtaj()
+    {
+        var ctx = $( "#canvas" ).get(0).getContext( "2d" );
+        ctx.translate( 0, 400 );
         ctx.beginPath();
-            ctx.moveTo(100, 100);
-            ctx.lineTo(200, 200);
-        ctx.stroke();
-
-        //vrati zadnje zapamćenu matricu transformacije (s vrha stoga)
-        ctx.restore();
-
-        ctx.beginPath();
-            ctx.moveTo(100, 100);
-            ctx.lineTo(200, 200);
+        function rek( dubina )
+        {
+            if( dubina > 0 )
+            {
+                rek( dubina - 1 );
+                ctx.rotate( -Math.PI/3 );
+                rek( dubina - 1 );
+                ctx.rotate( + 2 * Math.PI/3 );
+                rek( dubina - 1 );
+                ctx.rotate( -Math.PI/3 );
+                rek( dubina - 1 );
+            }
+            else
+            {
+                ctx.lineTo( 10, 0 );
+                ctx.translate( 10, 0 );
+            }
+        }
+        rek(4);
         ctx.stroke();
     }
 </script>
