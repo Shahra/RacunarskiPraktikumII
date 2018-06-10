@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-<canvas height="600" width="600" id="canvas">
+<canvas height="600" width="600" id="canvas" style="border: solid 1px black">
     Ovaj tekst se prikaže ako canvas nije podržan.
 </canvas>
 <script>
@@ -20,23 +20,30 @@
         // Ekvivalentno: $( "#canvas" )[0].getContext( "2d" );
         var ctx = $("#canvas").get(0).getContext("2d");
 
-        ctx.strokeStyle = "rgb(150, 150, 150)";
-        ctx.lineWidth = 8;
+        //zapamti trenutnu matricu transformacije (na stogu).
+        ctx.save();
+
+        //od sada nadalje sve se crta zarotirano za kut phi oko ishodišta (u smjeru kazaljke na satu)
+        ctx.rotate(Math.PI / 15);
+
+        //od sada nadalje sve se crta skalirano za faktor (dx, dy).
+        ctx.scale(2, 2);
+
+        //od sada nadalje sve se crta translatirano za (dx, dy), tj. ishodište se pomiče u točku (dx, dy).
+        ctx.translate(10, 10);
+
         ctx.beginPath();
-        ctx.moveTo(0, 500);
-        ctx.lineTo(100, 500);
-        ctx.arc(100, 500, 100, -Math.PI / 2, 0, false);
-        ctx.lineTo(300, 500);
+            ctx.moveTo(100, 100);
+            ctx.lineTo(200, 200);
         ctx.stroke();
 
-        for (var x = 0; x < 10; ++x)
-            for (var y = 0; y < 10; ++y) {
-                ctx.fillStyle = "rgb(" + x * 20 + ", 0, " + y * 20 + ")";
-                ctx.fillRect(x * 30, y * 30, 30, 30);
-            }
+        //vrati zadnje zapamćenu matricu transformacije (s vrha stoga)
+        ctx.restore();
 
-        ctx.font = "72px Arial";
-        ctx.fillText("Hello", 400, 400);
+        ctx.beginPath();
+            ctx.moveTo(100, 100);
+            ctx.lineTo(200, 200);
+        ctx.stroke();
     }
 </script>
 </body>
