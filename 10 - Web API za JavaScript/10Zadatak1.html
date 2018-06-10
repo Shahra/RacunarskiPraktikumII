@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    </head>
+<body>
+    <canvas height="600" width="600" id="canvas" style="border: solid 1px black"></canvas>
+    <script>
+        $( document ).ready( function() {
+            var n = 1;
+            var cnv = $("#canvas").get(0);
+            var ctx = cnv.getContext("2d");
+            ctx.font = "14px Arial";
+            $("#canvas")
+                .on("click", function() {
+                    var rect = canvas.getBoundingClientRect();
+                    var x = event.clientX - rect.left,
+                        y = event.clientY - rect.top;
+                    n += 1;
+                    if( n % 2 === 0) {
+                        ctx.fillText("X", x - 5, y + 6);
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                    }
+                    else {
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        ctx.fillText("X", x - 5, y + 6);
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
