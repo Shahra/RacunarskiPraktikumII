@@ -4,31 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFB_iNDeTeqRtURYpLTB7biZB5w8ZvfOE&callback=initMap" type="text/javascript"></script>
 </head>
 <body>
-    <p><button id="btn">Gdje sam?</button></p>
-    <div id="mapa"></div>
-    <script>
-        $(document).ready(function () {
-
-            $("#btn")
-                .on("click", function() {
-                    navigator.geolocation.getCurrentPosition(function(pos) {
-                        var mapa = $("#mapa").html('Lociram te...');
-                        var sir = pos.coords.latitude;
-                        var duz = pos.coords.longitude;
-                        mapa.html("<p>Zemljopisna sirina: " + sir + " Zemljopisna duzina: " + duz + "</p>")
-                        var img = new Image();
-                        img.src = "https://maps.googleapis.com/maps/api/"
-                                + "staticmap?center=" + sir + "," + duz
-                                + "&zoom=13&size=500x500&sensor=false"
-                                + "&markers=" + sir +  "," + duz
-                                + "&key=AIzaSyBFB_iNDeTeqRtURYpLTB7biZB5w8ZvfOE";
-                        mapa.append(img);
-                    });
-                });
-        });
-    </script>
+<canvas height="500" width="500" id="cnv">
+    Ovaj tekst se prikaže ako canvas nije podržan.
+</canvas>
+<script>
+</script>
 </body>
 </html>
