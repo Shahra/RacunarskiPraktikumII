@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datumi</title>
+</head>
+<body>
+    <script>
+        var t = new Date();
+
+        var mjesec = [
+            'Sijecanj',
+            'Veljaca',
+            'Ozujak',
+            'Travanj',
+            'Svibanj',
+            'Lipanj',
+            'Srpanj',
+            'Kolovoz',
+            'Rujan',
+            'Listopad',
+            'Studeni',
+            'Prosinac'
+        ];
+
+        var h = t.getHours();
+        if (h < 12) {
+            document.write('Dobro jutro! <br />');
+        }
+        else if (h < 18) {
+            document.write('Dobar dan! <br />');
+        }
+        else {
+            document.write('Dobra vecer! <br />');
+        }
+        document.write(t.getDate() + '. ' + mjesec[t.getMonth()] + ' ' + t.getFullYear());
+
+    </script>
+</body>
+</html>

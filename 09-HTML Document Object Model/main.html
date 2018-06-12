@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+
+<script>
+/*$( document ).ready( function() {
+    $( "button.klasa" )
+        .on( "click", function() {
+            alert( "Klik!" );
+        });
+
+    var btn = $( "<button>Klikni me!</button>" )
+                .addClass( "klasa" )
+    $( "body" ).append( btn );
+    // btn NE REAGIRA na događaj!!!
+});*/
+
+$( document ).ready( function() {
+    // Drugi parameter ("button.klasa") je CSS selektor
+    // podelemenata od body.
+    $( "body" ).on( "click", "button.klasa",
+        function() {
+            alert( "Klik!" );
+        }
+    );
+
+    var btn = $( "<button>Klikni me!</button>" ).addClass( "klasa" );
+
+    $( "body" ).append( btn );
+    // btn sad REAGIRA na događaj!!!
+});
+</script>
+</body>
+</html>

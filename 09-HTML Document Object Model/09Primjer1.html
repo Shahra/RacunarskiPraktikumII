@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+    <ul>
+        <li>Pas</li>
+        <li>Mačka</li>
+        <li class="velika">Žirafa</li>
+        </ul>
+    <ul>
+        <li class="velika">Slon</li>
+        <li>Mrav</li>
+    </ul>
+</body>
+<script>
+    var x = $('<h1>Naslov!</h1>');
+    // CSS Selector Reference -- https://www.w3schools.com/cssref/css_selectors.asp
+    var lis = $("li");
+
+    $('.velika').css('font-size', '24pt');
+
+    for(var i = 0; i < lis.length; i++) {
+        console.log('Hello ' + lis.eq(i).html());
+    }
+    $("body").prepend(x);
+</script>
+</html>

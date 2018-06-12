@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<input id="dateText" type="text" />
+<button id="b">Datum nije OK!</button>
+<p></p>
+<script>
+    // Ovdje mozes pronaci sve evente: https://developer.mozilla.org/en-US/docs/Web/Events
+    $(document).ready(function() {
+        var button = $('#b');
+
+        button
+            .css('background-color', 'red')
+            .attr('disabled', 'true');
+
+        $('#dateText')
+            .on("input", function() {
+                if(/(0[1-9]|[12][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})/.test($(this).val())){
+                    button
+                        .css('background-color', 'green')
+                        .removeAttr('disabled')
+                        .html('Datum je OK!');
+                }
+                else {
+                    button
+                        .css('background-color', 'red')
+                        .prop('disabled', 'true')
+                        .html('Datum nije OK!');
+                }
+            });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<img src="lav.jpg" alt="Lav" />
+<script>
+    $(document).ready(function() {
+        var img = $("[src='lav.jpg']");
+        var w = img.width(), h = img.height();
+        var cW = w, cH = h, k = 1.01;
+
+        function resizeImage(){
+            if(cW >= 2 * w) {
+                k = 0.99;
+            }
+            if(cW <= w) {
+                k = 1.01;
+            }
+            cW = k * cW;
+            cH = k * cH;
+            img.width(cW);
+            img.width(cH);
+        }
+        setInterval(resizeImage, 10);
+    });
+</script>
+</body>
+</html>
