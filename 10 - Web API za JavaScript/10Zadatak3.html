@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8" />
+    <title>Primjer 5 - WebStorage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<input id="noviPosao" type="text" />
+<button id="dodajButton">Dodaj novi posao</button> <br />
+<div id="listaPoslova"></div>
+<button id="obrisiButton">Obrisi sve s liste</button>
+<script>
+    function azurirajListuPoslova() {
+        var listaPoslova = JSON.parse(localStorage.getItem("listaPoslova"));
+        var n = 0;
+        //prvo obrisi listu poslova
+        $("#listaPoslova").html('');
+        for(var key in listaPoslova){
+            $("#listaPoslova")
+                .append( '<input id = "check_' + n + '"type="checkbox">')
+                .append( '<span id = "posao_' + n + '">' + key + '</span>')
+                .append( '<br />' );
+            if(listaPoslova[key] === true) {
+                $("#check_" + n).attr("checked", "true");
+                $("#posao_" + n).css("text-decoration", "line-through");
+            }
+            else {
+                $("#check_" + n).removeAttr("checked");
+                $("#posao_" + n).css("text-decoration", "none");
+            }
+            $("#check_" + n).change(function() {
+                var id = $(this).attr("id").substring(6);
+                listaPoslova = JSON.parse(localStorage.getItem("listaPoslova"));
+                if($(this).is(':checked')) {
+                    $("#posao_" + id).css("text-decoration", "line-through");
+                    listaPoslova[$("#posao_" + id).html()] = true;
+                }
+                else {
+                    $("#posao_" + id).css("text-decoration", "none");
+                    listaPoslova[$("#posao_" + id).html()] = false;
+                }
+                localStorage.setItem("listaPoslova", JSON.stringify(listaPoslova));
+            });
+            ++n;
+        }
+    }
+
+    $(document).ready(function() {
+        azurirajListuPoslova();
+        var listaPoslova = localStorage.getItem("listaPoslova");
+        if(listaPoslova === null) {
+            localStorage.setItem("listaPoslova", "{}");
+        }
+        $("#dodajButton").on("click", function() {
+           var noviPosao = $("#noviPosao").val();
+           if(noviPosao !== ""){
+               listaPoslova = JSON.parse(localStorage.getItem("listaPoslova"));
+               listaPoslova[noviPosao] = false;
+               localStorage.setItem("listaPoslova", JSON.stringify(listaPoslova));
+               azurirajListuPoslova();
+           }
+        });
+        $("#obrisiButton").on("click", function() {
+            localStorage.setItem("listaPoslova", "{}");
+            azurirajListuPoslova();
+        });
+    });
+</script>
+</body>
+</html>
