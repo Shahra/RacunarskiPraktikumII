@@ -2,49 +2,33 @@
 <html>
 <head>
     <meta charset="utf8" />
-    <title>Primjer 5 - WebStorage</title>
+    <title>Primjer 6 - Fibonacci bez workera</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-Zadnji put ste s ovog računala posjetili ovu stranicu: <span id="span"></span>.<br />
-<button id="btn">Odaberi boju pozadine za ovu sesiju:</button><input type="text" id="txt" />.<br />
-
+<button id="btn">1</button>
 <script>
-    /*
-        storage.setItem( key, value ) – dodavanje novog para u spremište (oba parametra su string).
-        value = storage.getItem( key ) – vraća vrijednost za zadani ključ iz spremišta (ili null ako ne postoji).
-        storage.removeItem( key ) – uklanjanje para sa zadanim ključem iz spremišta.
-        storage.clear() – brisanje svih ključeva iz spremišta.
-    */
-    $( document ).ready( function()
-    {
-        // Pogledaj u sessionStorage je li već ranije postavljena boja pozadine.
-        // Ako nije, spremi da je bijela.
-        if( sessionStorage.getItem( "bgCol" ) === null )
-            sessionStorage.setItem( "bgCol", "white" );
-
-        // Postavi boju pozadine stranice onakvu kakva piše u sessionStorage-u.
-        $( "body" ).css( "background-color", sessionStorage.getItem( "bgCol" ) );
-
-        // Klikom na gumb, sprema se boja pozadine koja je utipkana u text-box.
-        $( "#btn" ).on( "click", function()
-        {
-            sessionStorage.setItem( "bgCol", $( "#txt" ).val() );
-            $( "body" ).css( "background-color", sessionStorage.getItem( "bgCol" ) );
-        } );
-
-        // Još pogledaj kad je zadnji put posjećena stranica (sa ovog računala!)
-        if( localStorage.getItem( "zadnjaPosjeta" ) === null )
-            localStorage.setItem( "zadnjaPosjeta", "nikad" );
-
-        // Ispiši taj datum zadnje posjete u span.
-        $( "#span" ).html( localStorage.getItem( "zadnjaPosjeta" ) );
-
-        // Trenutno vrijeme spremi u localStorage, tako da kad idući put posjetimo
-        // stranicu dohvati sadašnje vrijeme.
-        var d = new Date();
-        localStorage.setItem( "zadnjaPosjeta", d.toString() );
-    } );
+    function fibo( n ) {
+        if( n < 2 ){
+            return n;
+        }
+        else {
+            return fibo(n-1) + fibo(n-2);
+        }
+    }
+    $(document).ready( function() {
+        // "Dokaz" da stranica (ni)je živa dok se računa -- button neće reagirati na klik.
+        $("#btn")
+            .on("click", function() {
+                var val = Number($( this ).html());
+                $(this).html(val + 1);
+            });
+        for(var i = 0; i < 42; ++i) {
+            var span = $("<span></span>");
+            span.html(fibo(i) + " ");
+            $("body").append(span);
+        }
+    });
 </script>
 </body>
 </html>
