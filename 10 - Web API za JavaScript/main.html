@@ -2,32 +2,36 @@
 <html>
 <head>
     <meta charset="utf8" />
-    <title>Primjer 6 - Fibonacci bez workera</title>
+    <title>Primjer 6 - Fibonacci sa workerom</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
 <button id="btn">1</button>
 <script>
-    function fibo( n ) {
-        if( n < 2 ){
-            return n;
-        }
-        else {
-            return fibo(n-1) + fibo(n-2);
-        }
-    }
-    $(document).ready( function() {
-        // "Dokaz" da stranica (ni)je živa dok se računa -- button neće reagirati na klik.
+    $(document).ready(function(){
+        // "Dokaz" da je stranica živa dok se računa -- button će reagirati na klik.
         $("#btn")
             .on("click", function() {
-                var val = Number($( this ).html());
+                var val = Number($(this).html());
                 $(this).html(val + 1);
             });
-        for(var i = 0; i < 42; ++i) {
-            var span = $("<span></span>");
-            span.html(fibo(i) + " ");
+
+        // Napravi novog workera koji će u pozadini računati Fibonaccijeve brojeve.
+        var worker = new Worker("Fibonacci.js"), n = 0;
+
+        // Kad dobijemo poruku od workera -- to znači da je gotov s računanjem.
+        // Dodamo u dokument novi span s izračunatim Fibo. brojem.
+        worker.onmessage = function(e) {
+            var span = $( "<span></span>" );
+            span.html(e.data + " ");
             $("body").append(span);
-        }
+
+            // Pokrenemo u workeru računanje idućeg Fibo. broja.
+            if( n < 50 )
+                worker.postMessage( ++n );
+        };
+        // Pošaljemo prvu poruku workeru, da izračuna za n=0.
+        worker.postMessage( n );
     });
 </script>
 </body>
