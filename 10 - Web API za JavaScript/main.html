@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf8" />
-    <title>Primjer 7 - Julia set, bez workera</title>
+    <title>Primjer 7 - Julia set, sa workerom</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
@@ -10,7 +10,8 @@
 <canvas width="1000" height="700" id="cnv"></canvas>
 <script>
 
-    var ctx = null;
+    var ctx = null, xSize = null, ySize = null;
+    var nWorkers = 4, chunk = 100;
 
     $( document ).ready( function()
     {
@@ -20,53 +21,46 @@
             $( this ).html( n+1 );
         } );
 
+        xSize = $( "#cnv" ).width();
+        ySize = $( "#cnv" ).height();
         ctx = $( "#cnv" ).get(0).getContext( "2d" );
 
-        for( var y = 0; y < 700; ++y )
-            crtaj( racunaj( { data: y } ) );
-    } );
-
-
-    function crtaj( e )
-    {
-        var pixelRow = ctx.getImageData( 0, e.data.y, 1000, 1 );
-        for( var x = 0; x < 1000; ++x )
+        // Svaki worker izračunava dio slike (chunk redaka)
+        // i kad ga izračuna, pošalje ga glavnom treadu koji ga nacrta.
+        for( var yStart = 0, iWorker = 0; yStart < ySize && iWorker < nWorkers; yStart += chunk, ++iWorker )
         {
-            // R, G, B, A
-            pixelRow.data[4*x]
-                = pixelRow.data[4*x+1]
-                = pixelRow.data[4*x+2]
-                = 255 - e.data.color[x];
-            pixelRow.data[4*x+3] = 255;
-        }
+            worker = new Worker( "Julia set.js" );
 
-        ctx.putImageData( pixelRow, 0, e.data.y );
-    }
-
-
-    function racunaj( e )
-    {
-        var y = 4*(e.data/700) - 2; // y je u [-2, 2]
-
-        var numIter = new Array( 1000 );
-        for( var xi = 0; xi < 1000; ++xi )
-        {
-            var x = 4*(xi/1000) - 2; // x je u [-2, 2]
-            var xx = x, yy = y;
-
-            numIter[xi] = 0;
-            while( numIter[xi] < 255 && xx*xx + yy*yy < 4 )
+            worker.onmessage = function(e)
             {
-                // z = xx + i*yy --> z = z^2 + (-0.72 + i*0.18)
-                var tmp = xx*xx - yy*yy - 0.7268953;
-                yy = 2*xx*yy + 0.188887;
-                xx = tmp;
-                ++numIter[xi];
-            }
-        }
+                // Dobije poruku e.data oblika { yStart: ..., pixelRow: ... }
+                // pixelRow predstavlja chunk redaka pixela.
+                // Te retke zapišemo na koordinate (0, e.data.yStart)
+                ctx.putImageData( e.data.pixelRow, 0, e.data.yStart );
 
-        return { data: {y: e.data, color: numIter } };
-    }
+                if( yStart < ySize )
+                {
+                    // Ako nismo došli do dna slike, proslijedi novih chunk redaka workeru na izračunavanje.
+                    if( yStart + chunk > ySize )
+                        chunk = ySize - yStart;
+
+                    // pixelRow je objekt koji sadrži polje data.
+                    // Polje pixelRow.data čuva informacije o svakom pixelu u nekom pravokutniku, redom po 4 elementa polja za svaki pixel.
+                    // pixelRow.data[4*xSize*y + 4*x] je intenzitet plave boje pixela (x, y).
+                    // pixelRow.data[4*xSize*y + 4*x+1] je intenzitet crvene boje pixela (x, y).
+                    // pixelRow.data[4*xSize*y + 4*x+2] je intenzitet zelene boje pixela (x, y).
+                    // pixelRow.data[4*xSize*y + 4*x+3] je alpha kanal (prozirnost) pixela (x, y).
+                    // Objekt pixelRow ćemo poslati Workeru da ga popuni za chunk redaka slike.
+                    var pixelRow = ctx.getImageData( 0, yStart, xSize, chunk );
+                    this.postMessage( { yStart: yStart, yEnd: yStart+chunk, xSize: xSize, ySize: ySize, pixelRow: pixelRow } );
+                    yStart += chunk;
+                }
+            }
+
+            var pixelRow = ctx.getImageData( 0, yStart, xSize, chunk );
+            worker.postMessage( { yStart: yStart, yEnd: yStart+chunk, xSize: xSize, ySize: ySize, pixelRow: pixelRow } );
+        }
+    } );
 
 </script>
 </body>
