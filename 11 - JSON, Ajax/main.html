@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8" />
+    <title>JSON</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<script>
+    var studenti = [
+        {
+            JMBAG: "1234567890",
+            ime: "Pero Perić",
+            ocjene: [5, 3, 2]
+        },
+        {
+            JMBAG: "0987654321",
+            ime: "Ana Anić",
+            ocjene: [2, 4]
+        }];
+    var jsonStudentiString = JSON.stringify(studenti);
+
+    console.log(studenti);
+
+    console.log(jsonStudentiString);
+    var jsonStudentiObjekt = JSON.parse(jsonStudentiString);
+    console.log(jsonStudentiObjekt);
+</script>
+</body>
+</html>
